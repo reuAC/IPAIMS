@@ -62,3 +62,27 @@
 - 通过配置资产用途，以有通知已读检测、任务完成状态检测功能。
 - 通过配置资产用途，以实现图书馆书籍借阅管理。
 - 通过配置人员组表，预设学生管理、教职工管理。
+
+### IPAIMS for School
+
+建设中
+
+### IPAIMS for Company
+
+建设中
+
+### IPAIMS for Governments
+
+建设中
+
+### IPAIMS for Group
+
+建设中
+
+### IPAIMS for  Contest
+
+建设中
+
+### IPAIMS Flexible
+
+建设中
