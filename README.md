@@ -3,6 +3,8 @@
 **Abbreviated as IPAIMS**  
 [中文版本](https://github.com/reuAC/IPAIMS/blob/re_uAC/README_CN.md)
 
+**Current content serves as the theoretical foundation of this system, which is still under development. For inquiries or if interested in contributing to the development, please contact reuac@qq.com.**
+
 There is a universal demand across various organizations, institutions, schools, companies, etc., for unified management of personnel and assets, as well as a need for information disclosure. However, there hasn't been a practical, aesthetically pleasing, user-friendly, open-source, and fully secure system available for use. Hence, this system is proposed.
 
 This system consists of a generic version, an exclusive version for specific institutions, and a central control version. The exclusive version inherits all the functionalities of the generic version and incorporates exclusive modifications and features based on specific requirements. The central control version can link multiple generic and exclusive versions to facilitate unified and coherent management.
