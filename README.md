@@ -78,10 +78,10 @@ Under construction
 
 Under construction
 
-### IPAIMS for  Contest
+### IPAIMS for Contest
 
 Under construction
 
-### IPAIMS for Flexible
+### IPAIMS Flexible
 
 Under construction
