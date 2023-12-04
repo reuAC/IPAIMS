@@ -1,6 +1,7 @@
 # Institutional Personnel and Asset Integrated Management System
 
 **Abbreviated as IPAIMS**
+[中文版本](https://github.com/reuAC/IPAIMS/blob/re_uAC/README_CN.md)
 
 There is a universal demand across various organizations, institutions, schools, companies, etc., for unified management of personnel and assets, as well as a need for information disclosure. However, there hasn't been a practical, aesthetically pleasing, user-friendly, open-source, and fully secure system available for use. Hence, this system is proposed.
 
