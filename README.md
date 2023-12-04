@@ -1,60 +1,84 @@
-# 机构人员与资产集成管理系统
+# Institutional Personnel and Asset Integrated Management System
 
-**Institutional Personnel and Asset Integrated Management System 简称 IPAIMS**
+**Abbreviated as IPAIMS**
 
-在各类组织、单位、学校、公司等机构中普遍存在人员与资产统一管理需求、信息公开需求，而现今并未出现务实可用、美观易用、代码开源、安全完备的相关系统可供使用，故有此系统。
+There is a universal demand across various organizations, institutions, schools, companies, etc., for unified management of personnel and assets, as well as a need for information disclosure. However, there hasn't been a practical, aesthetically pleasing, user-friendly, open-source, and fully secure system available for use. Hence, this system is proposed.
 
-本系统有泛用版本、对于各机构的专属版本与中控版本，专属版本会继承泛用版本的所有功能，并有依据需求制定的专属修改与专属功能。其中，中控版本可链接多个泛用版本、专属版本，以进行统一清晰的管理。
-本系统支持分布式部署使用，允许各个子机构建立所需系统，并在总机构建立所需系统、中控系统，在中控系统中进行相关配置后即可进行使用。
+This system consists of a generic version, an exclusive version for specific institutions, and a central control version. The exclusive version inherits all the functionalities of the generic version and incorporates exclusive modifications and features based on specific requirements. The central control version can link multiple generic and exclusive versions to facilitate unified and coherent management.
 
-系统中各功能子项皆允许用户选择是否开启。
-响应类服务具有基于特征码的缓存机制，以应对高并发访问。
+The system supports distributed deployment, allowing individual sub-organizations to establish their required systems. Moreover, the main organization can create necessary systems and a central control system, which, after relevant configurations in the central control system, can be used efficiently.
+
+Users can choose to activate or deactivate various functional sub-items within the system. Response-oriented services feature a cache mechanism based on feature codes to handle high concurrent access. All communication affecting data in the system employs dual-key communication, utilizing the ED25519 algorithm. Administrative personnel should configure physical keys or TOTP for two-factor authentication.
 
 ### IPAIMS Universal
 
-集成管理功能的运作原理中有两大模块，其分别为静态模块与时序模块。
-静态模块负责存放人员信息、资产信息。
-时序模块是基于静态模块，以时间为基本进行有序存储，类似日志，并有基于时序模块的相关统计数据。
+The operational principle of integrated management functions comprises two major modules: the static module and the temporal module.
+The static module is responsible for storing personnel information and asset data.
+The temporal module, based on the static module, organizes sequential storage based on time, resembling logs, and generates relevant statistical data based on temporal data.
 
-静态模块存放内容：权限组、人员状态表、人员组表、人员基本信息、资产状态表、资产组表、资产用途表、资产基本信息、静态链。
+Contents stored in the static module include: Permission Groups, Personnel Status Table, Personnel Group Table, Personnel Basic Information, Asset Status Table, Asset Group Table, Asset Usage Table, Asset Basic Information, and Static Chain.
 
-- 权限组：为妥善分配管理权限，故有权限组。允许管理人员创建多个权限组，并在其中添加权限节点。
-- 人员状态表：为清楚知晓人员当前状态，故有人员状态表。允许管理人员制定多种人员状态，如在职、休假、病假等。
-- 人员组表：为批量管理人员，故有人员组表。允许管理人员创建人员组，并将人员加入到人员组中，对人员组进行的管理，可映射到组内所有人员。
-- 人员基本信息：其中保存所有人员信息，允许管理人员自定义存储的字段，并配置时序字段。状态、权限组、人员组将以索引的方式链接。
-- 资产状态表：为清楚知晓资产状态，故有资产状态表。允许管理人员制定多种资产状态，如正常、维修、关闭等。
-- 资产组表：为批量管理资产，故有资产组表。允许管理人员创建资产组，并将资产加入到资产组中，对资产组进行的管理，可映射到组内所有资产。
-- 资产用途表：为清楚的记录、统计时序数据，故有资产用途表。允许管理人员设置资产的用途，如考勤终端，并配置日志格式、存储格式，而后系统根据配置生成对应API以供调用。
-- 资产基本信息：其中保存所有资产信息，允许管理人员自定义存储的字段，并配置时序字段。状态、资产组、资产用途将以索引的方式链接。
-- 时序字段：配合时序模块进行相关数据的统计、处理。允许管理人员配置时序周期、时序逻辑、时序字段名。
-- 时序周期：时序保存的周期，如考勤一般设置为一天。
-- 时序逻辑：时序处理时需遵循的逻辑，如可设置在休假状态时，若缺勤，则保存为休假，而非缺勤。
-- 时序字段名：在存储、调取、统计等操作时，需要制定的特征值名。
+- Permission Groups: To appropriately distribute management permissions, there are permission groups. Administrative personnel can create multiple permission groups and add permission nodes within them.
+- Personnel Status Table: To clearly understand the current status of personnel, there's a table for personnel statuses. Administrative personnel can define various personnel statuses such as active, on leave, sick leave, etc.
+- Personnel Group Table: For batch management of personnel, there's a table for personnel groups. Administrative personnel can create personnel groups, add individuals to these groups, and manage these groups collectively, reflecting on all individuals within the group.
+- Personnel Basic Information: This section stores all personnel information, allowing administrative personnel to customize stored fields and configure temporal fields. Status, permission groups, and personnel groups are linked as indices.
+- Asset Status Table: For clarity on asset status, there's an asset status table. Administrative personnel can define multiple asset statuses, such as operational, under maintenance, closed, etc.
+- Asset Group Table: For batch management of assets, there's an asset group table. Administrative personnel can create asset groups, add assets to these groups, and manage these groups collectively, reflecting on all assets within the group.
+- Asset Usage Table: To clearly record and statistically analyze temporal data, there's an asset usage table. Administrative personnel can set asset usages, such as attendance terminals, configure log formats, storage formats, and subsequently, the system generates corresponding APIs for access.
+- Asset Basic Information: This section stores all asset information, allowing administrative personnel to customize stored fields and configure temporal fields. Status, asset groups, and asset usages are linked as indices.
+- Temporal Fields: These fields assist in statistical and processing-related tasks in conjunction with the temporal module. Administrative personnel can configure temporal cycles, temporal logics, and temporal field names.
+- Temporal Cycles: The cycle for temporal storage, for instance, attendance records are generally set on a daily basis.
+- Temporal Logic: Logic that temporal processing must adhere to, such as setting a configuration that during leave status, absence should be recorded as leave, not as absent.
+- Temporal Field Names: Names specified for characteristic values during storage, retrieval, and statistical operations.
 
-时序模块需在静态模块基本配置完成后才能启动，需在静态模块中配置所需的时序模块，如考勤字段。
+The temporal module requires completion of basic configuration in the static module before activation, such as configuring required temporal modules like attendance fields.
 
-- 时序处理：基于静态模块中的时序字段的相关配置进行相关内容的处理。
-- 时序存储过程：基于链式存储，实时对API调用操作进行相关响应、存储。基于系统设置以一定周期封装成一个区块，保存到静态模块的静态链中，并附有头尾哈希值，第一个区块的头哈希值为生成时间的Unix时间戳经过哈希运算，尾部哈希值应为头哈希值+内容经过哈希运算。第二个及其之后的头哈希值应为其前一个区块的尾哈希值。
+- Temporal Processing: Pertaining to the relevant content based on configured fields within the static module.
+- Temporal Storage Process: Utilizing chain-based storage, this process responds in real-time to API call operations, storing data. At certain intervals based on system settings, data is encapsulated into a block and stored in the static chain, accompanied by head and tail hash values. The head hash value of the first block is the Unix timestamp of the creation time hashed, while the tail hash value should be the head hash value plus content hashed. Subsequent block's head hash value is the previous block's tail hash value.
 
-信息公开功能的运作以文章为最小单位，以总体为最大单位，单位由小到大分别为：文章、栏目、子站点、总体。
+The operation of information disclosure operates on articles as the smallest unit and encompasses overall content, hierarchically: articles, columns, sub-sites, and overall.
 
-- 文章：允许管理人员书写并公开文章。
-- 栏目：允许管理人员将文章归类到创建的某一栏目中，在渲染程序调用某一栏目时，将按格式返回栏目中所有文章。
-- 子站点：允许管理人员将栏目归类到某一子站点，以统一进行跨域等内容的配置。
-- 总体：所有内容都归类于总体，对总体的编辑将配置到所有子项。
+- Articles: Administrative personnel can write and publish articles.
+- Columns: Administrative personnel can classify articles into created columns, and when a rendering program calls a specific column, it returns all articles formatted accordingly.
+- Sub-sites: Administrative personnel can categorize columns into sub-sites, enabling unified configurations for cross-domain content, etc.
+- Overall: All content falls under the overall category, and any editing at this level applies to all sub-items.
 
-在信息公开的相关内容配置完成后，系统将生成对应的调用API，技术人员可编写相关代码以调用相应内容，同时系统会提供基于Vue的前后端分离网页模板，以便快速部署。
+Once the configurations for information disclosure are completed, the system generates corresponding API calls. Technical personnel can write code to access relevant content, and the system provides Vue-based frontend and backend separate webpage templates for swift deployment.
 
-其他功能：
+Other functionalities：
 
-- 机构地图：可绘制机构地图，允许管理人员在各处设置校准点，并在对应地点张贴校准二维码，以使得新成员或访客清楚得知所处位置与目的地路线。
+- Institutional Map: Enables the creation of an institutional map, allowing administrative personnel to set calibration points and place calibration QR codes at respective locations to guide new members or visitors regarding their positions and routes.
 
 ### IPAIMS for College
 
-该版本继承Universal版本的所有功能与逻辑，并根据实际需求添加了如下预设：
+This version inherits all functionalities and logics from the Universal version and introduces the following presets based on actual requirements:
 
-- 通过配置时序字段的时序逻辑，实现基于课程表的动态考勤。
-- 通过配置资产用途，以有动态的请假管理，动态实时的统计当前事务应到人员。
-- 通过配置资产用途，以有通知已读检测、任务完成状态检测功能。
-- 通过配置资产用途，以实现图书馆书籍借阅管理。
-- 通过配置人员组表，预设学生管理、教职工管理。
+- Dynamic attendance based on course schedules, achieved through configuring temporal logics of temporal fields.
+- Real-time dynamic leave management based on asset usage, dynamically and instantly calculating current expected personnel.
+- Features for notification read checks and task completion status checks, established through configuring asset usage.
+- Library book borrowing management achieved through configuring asset usage.
+- Preset student management and faculty/staff management through configuring personnel group tables.
+
+### IPAIMS for School
+
+Under construction
+
+### IPAIMS for Company
+
+Under construction
+
+### IPAIMS for Governments
+
+Under construction
+
+### IPAIMS for Group
+
+Under construction
+
+### IPAIMS for  Contest
+
+Under construction
+
+### IPAIMS for Flexible
+
+Under construction
